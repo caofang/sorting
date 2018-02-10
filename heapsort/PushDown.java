@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 public class PushDown
 {
 
 	public void PushDownRecursive(int a[], int size, int index)
 	{
-		if (2*index > size)	// already bottom level
+		if (2*(index+1) > size)	// already bottom level
 			return;
 
 		// pick a smaller chile
@@ -30,36 +31,139 @@ public class PushDown
 		}
 	}
 
+	public void PushDownRecursive(ArrayList<Integer> list, int size, int index)
+	{
+		// pick a smaller chile
+		int lChild = index * 2 + 1;
+		int rChild = index * 2 + 2;
+		int sChild;	// smaller child
+
+		if (lChild > size-1)	// no child
+			return;
+		
+		// has two children
+		if (rChild <= size-1 && list.get(rChild) <= list.get(lChild)) 
+			sChild = rChild;
+		else 
+			sChild = lChild;
+
+		if (list.get(index) <= list.get(sChild))
+			return;
+		else
+		{
+			// Swap;
+			int a = list.get(index);
+			int b = list.get(sChild);
+
+			a = a ^ b;
+			b = a ^ b;
+			a = a ^ b;
+
+			list.set(index, a);
+			list.set(sChild,b);
+
+			// System.out.println(list);	
+			PushDownRecursive(list, size, sChild);
+		}
+	}
+
+	public void PushDownIterative(ArrayList<Integer> list, int size, int index)
+	{
+		while(true)
+		{
+			// pick a smaller chile
+			int lChild = index * 2 + 1;
+			int rChild = index * 2 + 2;
+			int sChild;	// smaller child
+
+			if (lChild > size-1)	// no child
+				return;
+			
+			// has two children
+			if (rChild <= size-1 && list.get(rChild) <= list.get(lChild)) 
+				sChild = rChild;
+			else 
+				sChild = lChild;
+
+			if (list.get(index) <= list.get(sChild))
+				return;
+			else
+			{
+				// Swap;
+				int a = list.get(index);
+				int b = list.get(sChild);
+
+				a = a ^ b;
+				b = a ^ b;
+				a = a ^ b;
+
+				list.set(index, a);
+				list.set(sChild,b);
+
+				index = sChild;
+			}
+		}
+	}
+
+	public void DeleteMin(ArrayList<Integer> list)
+	{
+		// copy the last one the fromt
+		list.set(0, list.get(list.size()-1));
+		// delete the last one
+		list.remove(list.size()-1);	
+	}
+
 	public void PrintArray(int a[])
 	{
 		for (int i=0; i<a.length; i++)
-			System.out.printf("%d,",a[i]);
+			System.out.printf("%d, ",a[i]);
 
 		System.out.print("\b\n");
 	}	
 
-	public void PrintTreeNode(int a[])
-	{
-
-	}
-
-	// public  void Swap(int a, int b)
-	// {
-		
-	// }
-
 	public static void main(String args[])
 	{
+		int array[] = {10,15,12,16,18,24,23,18,16,20,19,16,20};
+		
+		ArrayList<Integer> myData = new ArrayList<Integer>();
+		for (int i: array)
+			myData.add(i);
 
-		int array[] = {10,15,12,16,18,14,23,18,16,20,19,16,20};
+		System.out.println("original data");		
+		System.out.println(myData);
+		System.out.println(myData.size());
 
 		PushDown pushDown = new PushDown();
-		pushDown.PrintArray(array);
 
-		array[0] = array[array.length-1];
-		pushDown.PushDownRecursive(array, array.length - 2, 0);
+		// array[0] = array[array.length-1];
+		// pushDown.PushDownRecursive(array, array.length - 1, 0);
+		// pushDown.PrintArray(array);
 
-		pushDown.PrintArray(array);
+		pushDown.DeleteMin(myData);
+		System.out.println("\nDelete Min");
+		System.out.println(myData);	
+
+		pushDown.PushDownRecursive(myData, myData.size(), 0);
+		System.out.println("Pushed Down");
+		System.out.println(myData);	
+
+		pushDown.DeleteMin(myData);
+		System.out.println("\nDelete Min");
+		System.out.println(myData);	
+		
+		pushDown.PushDownIterative(myData, myData.size(), 0);
+		System.out.println("Pushed Down");
+		System.out.println(myData);	
+
 
 	}
 }
+
+
+
+
+
+
+
+
+

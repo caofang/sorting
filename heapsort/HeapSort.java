@@ -62,11 +62,12 @@ public class HeapSort
 	// Driver program
 	public static void main(String args[])
 	{
-		int arr[] = {12, 11, 13, 5, 6, 7};
+		int arr[] = {1,2,3,4,5,6,7,8,9,10,11,12,13};
 		int n = arr.length;
 
 		HeapSort ob = new HeapSort();
-		ob.sort(arr);
+		// ob.sort(arr);
+		ob.heapify(arr, 13, 0);
 
 		System.out.println("Sorted array is");
 		printArray(arr);
