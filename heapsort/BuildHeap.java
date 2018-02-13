@@ -45,16 +45,6 @@ public class BuildHeap
 		}
 	}
 
-	// public void Swap(ArrayList<Integer> list,int idx1, int idx2)
-	// {
-	// 	// Swap;
-	// 	int a = list.get(idx1);
-	// 	int b = list.get(idx2);
-
-	// 	list.set(idx2, a);
-	// 	list.set(idx1, b);
-	// }
-
 	public static void main(String args[])
 	{
 		int array[] = {13,12,11,10,9,8,7,6,5,4,3,2,1};
@@ -77,7 +67,7 @@ public class BuildHeap
 		bh.BuildHeapIterative(myData, size, size/2-1);
 
 		BinaryTree bt = new BinaryTree(myData);
-		bt.printRows();
+		bt.PrintTree();
 
 		System.out.println(myData);
 	}
