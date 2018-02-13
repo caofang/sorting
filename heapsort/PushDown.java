@@ -38,11 +38,11 @@ public class PushDown
 		int rChild = index * 2 + 2;
 		int sChild;	// smaller child
 
-		if (lChild > size-1)	// no child
+		if (lChild >= size)	// no child
 			return;
 		
 		// has two children
-		if (rChild <= size-1 && list.get(rChild) <= list.get(lChild)) 
+		if (rChild < size && list.get(rChild) <= list.get(lChild)) 
 			sChild = rChild;
 		else 
 			sChild = lChild;
@@ -76,11 +76,11 @@ public class PushDown
 			int rChild = index * 2 + 2;
 			int sChild;	// smaller child
 
-			if (lChild > size-1)	// no child
+			if (lChild >= size)	// no child
 				return;
 			
 			// has two children
-			if (rChild <= size-1 && list.get(rChild) <= list.get(lChild)) 
+			if (rChild < size && list.get(rChild) <= list.get(lChild)) 
 				sChild = rChild;
 			else 
 				sChild = lChild;
@@ -150,7 +150,7 @@ public class PushDown
 		pushDown.DeleteMin(myData);
 		System.out.println("\nDelete Min");
 		System.out.println(myData);	
-		
+
 		pushDown.PushDownIterative(myData, myData.size(), 0);
 		System.out.println("Pushed Down");
 		System.out.println(myData);	
