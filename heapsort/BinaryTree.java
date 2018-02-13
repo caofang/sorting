@@ -6,7 +6,19 @@ public class BinaryTree
 	int size;
 	int level;
 
+	BinaryTree()
+	{
+
+	}
+
 	BinaryTree(ArrayList<Integer> l)
+	{
+		list = l;
+		size = getSize();
+		level = getLevel(size);
+	}
+
+	void setData(ArrayList<Integer> l)
 	{
 		list = l;
 		size = getSize();
@@ -52,8 +64,7 @@ public class BinaryTree
 				printSpaces(rSpace-1);
 			else
 				printSpaces(rSpace);
-		}
-			
+		}			
 	}
 
 	void printSpaces(int n)
@@ -100,7 +111,7 @@ public class BinaryTree
 		System.out.println("==========");
 
 		BinaryTree bt = new BinaryTree(myData);
-		bt.printRows();
+		bt.PrintTree();
 
 		System.out.println(myData);
 		

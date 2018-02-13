@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 public class PushDown
 {
-
 	public void PushDownRecursive(int a[], int size, int index)
 	{
 		if (2*(index+1) > size)	// already bottom level
@@ -51,18 +50,8 @@ public class PushDown
 			return;
 		else
 		{
-			// Swap;
-			int a = list.get(index);
-			int b = list.get(sChild);
-
-			a = a ^ b;
-			b = a ^ b;
-			a = a ^ b;
-
-			list.set(index, a);
-			list.set(sChild,b);
-
-			// System.out.println(list);	
+			// Swap
+			Swap(list, index, sChild);
 			PushDownRecursive(list, size, sChild);
 		}
 	}
@@ -89,20 +78,21 @@ public class PushDown
 				return;
 			else
 			{
-				// Swap;
-				int a = list.get(index);
-				int b = list.get(sChild);
-
-				a = a ^ b;
-				b = a ^ b;
-				a = a ^ b;
-
-				list.set(index, a);
-				list.set(sChild,b);
-
+				// Swap
+				Swap(list, index, sChild);
 				index = sChild;
 			}
 		}
+	}
+
+	public void Swap(ArrayList<Integer> list,int idx1, int idx2)
+	{
+		// Swap;
+		int a = list.get(idx1);
+		int b = list.get(idx2);
+
+		list.set(idx2, a);
+		list.set(idx1, b);
 	}
 
 	public void DeleteMin(ArrayList<Integer> list)
@@ -123,6 +113,7 @@ public class PushDown
 
 	public static void main(String args[])
 	{
+		// generate data
 		int array[] = {10,15,12,16,18,24,23,18,16,20,19,16,20};
 		
 		ArrayList<Integer> myData = new ArrayList<Integer>();
@@ -131,30 +122,39 @@ public class PushDown
 
 		System.out.println("original data");		
 		System.out.println(myData);
-		System.out.println(myData.size());
-
-		PushDown pushDown = new PushDown();
+		System.out.println("==========");
 
 		// array[0] = array[array.length-1];
 		// pushDown.PushDownRecursive(array, array.length - 1, 0);
 		// pushDown.PrintArray(array);
 
-		pushDown.DeleteMin(myData);
+		PushDown pushDown = new PushDown();
+		BinaryTree bt = new BinaryTree();
+
 		System.out.println("\nDelete Min");
+		pushDown.DeleteMin(myData);		
+		bt.setData(myData);
+		bt.PrintTree();
 		System.out.println(myData);	
 
-		pushDown.PushDownRecursive(myData, myData.size(), 0);
-		System.out.println("Pushed Down");
+		System.out.println("Pushed Down PushDownRecursive");
+		pushDown.PushDownRecursive(myData, myData.size(), 0);		
+		bt.setData(myData);
+		bt.PrintTree();
 		System.out.println(myData);	
 
-		pushDown.DeleteMin(myData);
+
 		System.out.println("\nDelete Min");
-		System.out.println(myData);	
+		pushDown.DeleteMin(myData);		
+		bt.setData(myData);
+		bt.PrintTree();
+		System.out.println(myData);
 
-		pushDown.PushDownIterative(myData, myData.size(), 0);
-		System.out.println("Pushed Down");
+		System.out.println("Pushed Down PushDownIterative");
+		pushDown.PushDownIterative(myData, myData.size(), 0);		
+		bt.setData(myData);
+		bt.PrintTree();
 		System.out.println(myData);	
-
 
 	}
 }
