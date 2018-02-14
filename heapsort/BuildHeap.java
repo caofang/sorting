@@ -21,6 +21,10 @@ public class BuildHeap
 			return;
 
 		pushDown.PushDownRecursive(list,size,index); //Now pushdown the root.
+		
+		// System.out.println(list);
+		// BinaryTree bt = new BinaryTree(list);
+		// bt.PrintTree();
 
 		index--;
 		BuildHeapRecursive(list, size, index);
@@ -40,6 +44,9 @@ public class BuildHeap
 				return;
 
 			pushDown.PushDownRecursive(list,size,index); //Now pushdown the root.
+			// System.out.println(list);
+			// BinaryTree bt = new BinaryTree(list);
+			// bt.PrintTree();
 
 			index--;
 		}
@@ -55,20 +62,38 @@ public class BuildHeap
 			myData.add(i);
 
 		size = myData.size();
-		System.out.println("Original Data");
+		System.out.println("========== Original Data ==========");
 		System.out.println(myData);
-		System.out.println("==========");
-
-		BuildHeap bh = new BuildHeap();
-		
-		// index is the last subtree index = size/2-1
-		// bh.BuildHeapRecursive(myData, size, size/2-1);
-		System.out.println("\nBuildHeapIterative");
-		bh.BuildHeapIterative(myData, size, size/2-1);
 
 		BinaryTree bt = new BinaryTree(myData);
+
 		bt.PrintTree();
 
+		BuildHeap bh = new BuildHeap();
+
+		// ========== build with recursive way ==========
+		// bh.BuildHeapRecursive(myData, size, size/2-1);
+		System.out.println("\n========== Build Heap Recursive ==========");
+		bh.BuildHeapRecursive(myData, size, size/2-1);
+
+		System.out.println("\nFinal Result");
 		System.out.println(myData);
+		bt.setData(myData);
+		bt.PrintTree();
+		
+
+		// ========== build with interative way ==========
+		for (int i=0; i<array.length; i++)
+			myData.set(i, array[i]);
+
+		// index is the last subtree index = size/2-1
+		// bh.BuildHeapRecursive(myData, size, size/2-1);
+		System.out.println("\n========== Build Heap Iterative ==========");
+		bh.BuildHeapIterative(myData, size, size/2-1);
+
+		System.out.println("\nFinal Result");
+		System.out.println(myData);
+		bt.setData(myData);
+		bt.PrintTree();
 	}
 }
