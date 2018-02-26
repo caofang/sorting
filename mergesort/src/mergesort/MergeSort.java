@@ -12,37 +12,36 @@ public class MergeSort {
     }
 
     private void Sort(int leftIdx, int rightIdx) 
-    {
-        // check if leftIdx is smaller than rightIdx, if not then the array is sorted
+    {       
         if (leftIdx < rightIdx) 
         {
         	System.out.printf("leftIdx %d, rightIdx %d\n", leftIdx, rightIdx);
         	PrintArray(myArray,leftIdx, rightIdx);
         	
-            // Get the index of the element which is in the middle
+            // split the array from the middle
             int middle = leftIdx + (rightIdx - leftIdx) / 2;
             System.out.printf("middle %d\n\n", middle);
-            // Sort the left side of the array
+            
             Sort(leftIdx, middle);
-            // Sort the right side of the array
             Sort(middle + 1, rightIdx);
-            // Combine them both
+
             Merge(leftIdx, middle, rightIdx);
         }
     }
 
-    private void Merge(int leftIdx, int middle, int rightIdx) {
-
-        // Copy both parts into the helper array
+    private void Merge(int leftIdx, int middle, int rightIdx) 
+    {
+    	System.out.printf("leftIdx %d, middle %d, rightIdx %d\n",leftIdx, middle, rightIdx);
         for (int i = leftIdx; i <= rightIdx; i++) {
             helper[i] = myArray[i];
         }
 
-        int l1 = leftIdx;	// array index
-        int m = middle + 1;
-        int l2 = leftIdx;	// helper array index
-        // Copy the smallest values from either the left or the right side back
-        // to the original array
+        int l1 = leftIdx;	// helper array index
+        int m = middle + 1;	// beginning of right array
+        int l2 = leftIdx;	// myArray index
+       
+        // helper[] = { a,b,c ... | x,y,z ... }
+        
         while (l1 <= middle && m <= rightIdx) {
             if (helper[l1] <= helper[m]) {
                 myArray[l2] = helper[l1];
@@ -53,15 +52,12 @@ public class MergeSort {
             }
             l2++;
         }
-        // Copy the rest of the left side of the array into the target array
+        // copy the rest
         while (l1 <= middle) {
             myArray[l2] = helper[l1];
             l2++;
             l1++;
         }
-        // Since we are sorting in-place any leftover elements from the right side
-        // are already at the right position.
-
     }
     
 	public void PrintArray(int a[])
@@ -80,7 +76,7 @@ public class MergeSort {
 	
 	public static void main(String[] args)
 	{				
-		int array[] = {7,6,5,4,3,2,1,0};
+		int array[] = {3,2,1,0};
 		MergeSort ms = new MergeSort(array);
 		
 		ms.PrintArray(array);
