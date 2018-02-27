@@ -35,23 +35,23 @@ public class MergeSort {
         for (int i = 0; i < size1; i++)
             helper[i] = myArray[leftIdx + i];
         
-        int l1 = leftIdx;	// helper array index
-        int r1 = middle + 1;	// beginning of right array
+        int l1 = 0;	// beginning of left helper array
+        int r1 = middle - leftIdx + 1;	// beginning of right helper array
         int l2 = leftIdx;	// myArray index
                
-        while (l1 <= middle && r1 <= rightIdx) {
-            if (helper[l1-leftIdx] <= helper[r1-leftIdx]) {
-                myArray[l2] = helper[l1-leftIdx];
+        while (l1 <= middle-leftIdx && r1 <= rightIdx-leftIdx) {
+            if (helper[l1] <= helper[r1]) {
+                myArray[l2] = helper[l1];
                 l1++;
             } else {
-                myArray[l2] = helper[r1-leftIdx];
+                myArray[l2] = helper[r1];
                 r1++;
             }
             l2++;
         }
         // copy the rest
-        while (l1 <= middle) {
-            myArray[l2] = helper[l1-leftIdx];
+        while (l1 <= middle-leftIdx) {
+            myArray[l2] = helper[l1];
             l2++;
             l1++;
         }
