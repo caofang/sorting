@@ -1,4 +1,3 @@
-package mergesort;
 
 public class MergeSort {
 
@@ -76,9 +75,12 @@ public class MergeSort {
 		int array[] = {7,6,5,4,3,2,1,0};
 		MergeSort ms = new MergeSort(array);
 		
+		System.out.println("Original array");
 		ms.PrintArray(array);
+		
 		ms.Sort(0, array.length - 1);
-		ms.PrintArray(array);
-		System.out.println("done");
+		
+		System.out.println("Sorted array");
+		ms.PrintArray(array);		
 	}
 }
